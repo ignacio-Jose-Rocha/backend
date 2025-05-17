@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 import { TiposRespuestaEnum } from '../../encuestas/enums/tipos-respuesta.enum';
 import { Encuesta } from '../../encuestas/entities/encuesta.entity';
-import { Opcion } from './opcion.entity';
+import { Opcion } from '../../opciones/entities/option.entity';
 
 @Entity({ name: 'preguntas' })
 export class Pregunta {
