@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { TiposRespuestaEnum } from '../enums/tipos-respuesta.enum';
+import { TiposRespuestaEnum } from '../../encuestas/enums/tipos-respuesta.enum';
 import { Encuesta } from '../../encuestas/entities/encuesta.entity';
 import { Opcion } from './opcion.entity';
 

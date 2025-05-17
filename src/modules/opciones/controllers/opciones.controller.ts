@@ -1,8 +1,8 @@
 import { Controller, Post, Body, Get, Param } from '@nestjs/common';
 import { OpcionesService } from '../services/opciones.service';
-import { CreateOpcionDto } from '../dtos/create-opcion.dto';
+import { CreateOpcionDto } from '../dtos/create-option.dto';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { Opcion } from '../entities/opcion.entity';
+import { Opcion } from '../entities/option.entity';
 
 @ApiTags('opciones')
 @Controller('opciones')

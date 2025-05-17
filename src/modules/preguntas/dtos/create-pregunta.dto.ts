@@ -8,7 +8,7 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { TiposRespuestaEnum } from '../enums/tipos-respuesta.enum';
+import { TiposRespuestaEnum } from '../../encuestas/enums/tipos-respuesta.enum';
 import { Type } from 'class-transformer';
 import { CreateOpcionDto } from './create-opcion.dto';
 

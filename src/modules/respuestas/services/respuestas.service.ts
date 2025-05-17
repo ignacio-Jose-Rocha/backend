@@ -12,6 +12,7 @@ import { Encuesta } from '../../encuestas/entities/encuesta.entity';
 import { Pregunta } from '../../preguntas/entities/pregunta.entity';
 import { Opcion } from '../../opciones/entities/option.entity';
 import { RegistrarRespuestasDto } from '../dtos/registrar-respuestas.dto';
+import { TiposRespuestaEnum } from '../../encuestas/enums/tipos-respuesta.enum';
 
 @Injectable()
 export class RespuestasService {
@@ -61,7 +62,7 @@ export class RespuestasService {
         );
       }
 
-      if (respuestaPregunta.tipo === 'ABIERTA') {
+      if (respuestaPregunta.tipo === TiposRespuestaEnum.ABIERTA) {
         if (!respuestaPregunta.texto) {
           throw new BadRequestException(
             'Respuesta de texto requerida para pregunta abierta',
@@ -85,7 +86,8 @@ export class RespuestasService {
         }
 
         if (
-          pregunta.tipo_respuesta === 'OPCION_MULTIPLE_SELECCION_SIMPLE' &&
+          pregunta.tipo_respuesta ===
+            TiposRespuestaEnum.OPCION_MULTIPLE_SELECCION_SIMPLE &&
           respuestaPregunta.opciones.length > 1
         ) {
           throw new BadRequestException(

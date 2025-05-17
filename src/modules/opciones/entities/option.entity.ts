@@ -5,7 +5,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Pregunta } from '../preguntas/entities/pregunta.entity';
+import { Pregunta } from '../../preguntas/entities/pregunta.entity';
 
 @Entity({ name: 'opciones' })
 export class Opcion {

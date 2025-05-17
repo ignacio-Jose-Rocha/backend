@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Opcion } from '../entities/opcion.entity';
-import { CreateOpcionDto } from '../dtos/create-opcion.dto';
+import { Opcion } from '../entities/option.entity';
+import { CreateOpcionDto } from '../dtos/create-option.dto';
 
 @Injectable()
 export class OpcionesService {
