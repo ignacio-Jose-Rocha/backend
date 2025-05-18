@@ -12,10 +12,17 @@ export class Respuesta {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('int')
-  id_encuesta: number;
+  @Column({ name: 'id_encuesta' })
+  idEncuesta: number;
 
   @ManyToOne(() => Encuesta)
   @JoinColumn({ name: 'id_encuesta' })
   encuesta: Encuesta;
+
+  @Column({
+    name: 'fecha_creacion',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  fechaCreacion: Date;
 }

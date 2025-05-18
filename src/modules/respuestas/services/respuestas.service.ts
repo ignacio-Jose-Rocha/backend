@@ -43,8 +43,18 @@ export class RespuestasService {
       throw new NotFoundException('Encuesta no encontrada o enlace inválido');
     }
 
+    if (encuesta.fechaVencimiento && new Date() > encuesta.fechaVencimiento) {
+      throw new BadRequestException(
+        'La encuesta ha expirado y no acepta más respuestas',
+      );
+    }
+
+    if (!encuesta.habilitada) {
+      throw new BadRequestException('La encuesta no está habilitada');
+    }
+
     const respuesta = this.respuestaRepository.create({
-      id_encuesta: encuesta.id,
+      idEncuesta: encuesta.id,
     });
     const respuestaGuardada = await this.respuestaRepository.save(respuesta);
 

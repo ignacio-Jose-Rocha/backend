@@ -9,6 +9,11 @@ export class Encuesta {
   @Column()
   nombre: string;
 
+  @OneToMany(() => Pregunta, (pregunta) => pregunta.encuesta, {
+    cascade: ['insert'],
+  })
+  preguntas: Pregunta[];
+
   @Column({ name: 'codigo_respuesta' })
   codigoRespuesta: string;
 
@@ -18,20 +23,13 @@ export class Encuesta {
   @Column({ default: true })
   habilitada: boolean;
 
-  @Column({ name: 'fecha_vencimiento', nullable: true })
-  fechaVencimiento: Date;
+  @Column({ name: 'fecha_vencimiento', nullable: true, type: 'timestamp' })
+  fechaVencimiento: Date | null;
 
-  @Column({ default: false })
-  publica: boolean;
-
-  @Column({ nullable: true })
-  categoria: string;
-
-  @Column({ name: 'email_creador', nullable: true })
-  emailCreador: string;
-
-  @OneToMany(() => Pregunta, (pregunta) => pregunta.encuesta, {
-    cascade: ['insert'],
+  @Column({
+    name: 'fecha_creacion',
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
   })
-  preguntas: Pregunta[];
+  fechaCreacion: Date;
 }

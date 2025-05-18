@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { RespuestasController } from './controllers/respuestas.controller';
 import { RespuestasService } from './services/respuestas.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Encuesta } from '../encuestas/entities/encuesta.entity';
 import { Pregunta } from '../preguntas/entities/pregunta.entity';
 import { Opcion } from '../opciones/entities/option.entity';

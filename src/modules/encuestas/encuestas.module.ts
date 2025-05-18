@@ -5,12 +5,11 @@ import { EncuestasService } from './services/encuestas.service';
 import { Encuesta } from './entities/encuesta.entity';
 import { Pregunta } from './entities/pregunta.entity';
 import { Opcion } from './entities/opcion.entity';
-import { QrService } from '../../shared/services/qr.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Encuesta, Pregunta, Opcion])],
   controllers: [EncuestasController],
-  providers: [EncuestasService, QrService],
+  providers: [EncuestasService],
   exports: [EncuestasService],
 })
 export class EncuestasModule {}
