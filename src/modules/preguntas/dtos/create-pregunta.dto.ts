@@ -23,7 +23,12 @@ export class CreatePreguntaDto {
   @IsNotEmpty()
   texto: string;
 
-  @ApiProperty({ enum: TiposRespuestaEnum })
+  @ApiProperty({ 
+    enum: TiposRespuestaEnum,
+    enumName: 'TiposRespuestaEnum',
+    example: TiposRespuestaEnum.VERDADERO_FALSO,
+    description: 'Tipo de respuesta: ABIERTA, OPCION_MULTIPLE_SELECCION_SIMPLE, OPCION_MULTIPLE_SELECCION_MULTIPLE, VERDADERO_FALSO'
+  })
   @IsEnum(TiposRespuestaEnum)
   @IsNotEmpty()
   tipo_respuesta: TiposRespuestaEnum;

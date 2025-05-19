@@ -4,7 +4,10 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  IsEnum,
 } from 'class-validator';
+import { TiposRespuestaEnum } from '../../encuestas/enums/tipos-respuesta.enum';
+
 
 export class RespuestaPreguntaDto {
   @IsNumber()
@@ -13,10 +16,8 @@ export class RespuestaPreguntaDto {
 
   @IsString()
   @IsNotEmpty()
-  tipo:
-    | 'ABIERTA'
-    | 'OPCION_MULTIPLE_SELECCION_SIMPLE'
-    | 'OPCION_MULTIPLE_SELECCION_MULTIPLE';
+  @IsEnum(TiposRespuestaEnum)
+  tipo: TiposRespuestaEnum;
 
   @IsOptional()
   @IsString()
