@@ -21,13 +21,17 @@ export class Pregunta {
   @Column()
   texto: string;
 
-  @Column({ type: 'enum', enum: TiposRespuestaEnum })
-  tipo_respuesta: TiposRespuestaEnum;
+@Column({ 
+    type: 'enum',
+    enum: TiposRespuestaEnum,
+    name: 'tipo_respuesta'
+  })
+  tipoRespuesta: TiposRespuestaEnum;
 
   @ManyToOne(() => Encuesta, (encuesta) => encuesta.preguntas)
   @JoinColumn({ name: 'id_encuesta' })
   encuesta: Encuesta;
 
-  @OneToMany(() => Opcion, (opcion) => opcion.pregunta, { cascade: ['insert'] })
+  @OneToMany(() => Opcion, (opcion) => opcion.pregunta, { cascade:true })
   opciones: Opcion[];
 }

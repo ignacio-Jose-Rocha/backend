@@ -11,6 +11,7 @@ import { v4 } from 'uuid';
 import { UpdateEncuestaDto } from '../dtos/update-encuesta.dto';
 import { CodigoTipoEnum } from '../enums/codigo-tipo.enum';
 import { Pregunta } from '../entities/pregunta.entity';
+import { Opcion } from '../../opciones/entities/option.entity';
 
 @Injectable()
 export class EncuestasService {
@@ -19,29 +20,42 @@ export class EncuestasService {
     private encuestaRepository: Repository<Encuesta>,
     @InjectRepository(Pregunta)
     private preguntaRepository: Repository<Pregunta>,
+    @InjectRepository(Opcion)
+    private opcionRepository: Repository<Opcion>,
   ) {}
 
   async crearEncuesta(dto: CreateEncuestaDto): Promise<{
-    id: number;
-    codigoRespuesta: string;
-    codigoResultados: string;
-    fechaVencimiento?: Date;
-  }> {
-    const encuesta = this.encuestaRepository.create({
-      ...dto,
-      codigoRespuesta: v4(),
-      codigoResultados: v4(),
-      habilitada: true,
-    });
+  id: number;
+  codigoRespuesta: string;
+  codigoResultados: string;
+}> {
+  // Crear la encuesta con cascada
+  const encuesta = this.encuestaRepository.create({
+    nombre: dto.nombre,
+    codigoRespuesta: v4(),
+    codigoResultados: v4(),
+    habilitada: true,
+    fechaVencimiento: dto.fechaVencimiento, // Mantenemos fechaVencimiento
+    preguntas: dto.preguntas.map(preguntaDto => ({
+      numero: preguntaDto.numero,
+      texto: preguntaDto.texto,
+      tipoRespuesta: preguntaDto.tipo_respuesta, // Asegúrate que coincidan los nombres
+      opciones: preguntaDto.opciones ? preguntaDto.opciones.map(opcionDto => ({
+        texto: opcionDto.texto,
+        numero: opcionDto.numero
+      })) : []
+    }))
+  });
 
-    const encuestaCreada = await this.encuestaRepository.save(encuesta);
-    return {
-      id: encuestaCreada.id,
-      codigoRespuesta: encuestaCreada.codigoRespuesta,
-      codigoResultados: encuestaCreada.codigoResultados,
-      ...(dto.fechaVencimiento && { fechaVencimiento: dto.fechaVencimiento }),
-    };
-  }
+  // Guardar todo en cascada
+  const encuestaCreada = await this.encuestaRepository.save(encuesta);
+
+  return {
+    id: encuestaCreada.id,
+    codigoRespuesta: encuestaCreada.codigoRespuesta,
+    codigoResultados: encuestaCreada.codigoResultados
+  };
+}
 
   async obtenerEncuesta(
     id: number,

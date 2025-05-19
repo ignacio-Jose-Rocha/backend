@@ -96,8 +96,7 @@ export class RespuestasService {
         }
 
         if (
-          pregunta.tipo_respuesta ===
-            TiposRespuestaEnum.OPCION_MULTIPLE_SELECCION_SIMPLE &&
+          pregunta.tipoRespuesta === TiposRespuestaEnum.OPCION_MULTIPLE_SELECCION_SIMPLE &&
           respuestaPregunta.opciones.length > 1
         ) {
           throw new BadRequestException(
