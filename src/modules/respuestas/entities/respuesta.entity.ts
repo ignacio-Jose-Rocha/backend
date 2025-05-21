@@ -4,8 +4,11 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Encuesta } from '../../encuestas/entities/encuesta.entity';
+import { RespuestaAbierta } from './respuesta-abierta.entity';
+import { RespuestaOpcion } from './respuesta-opcion.entity';
 
 @Entity('respuestas')
 export class Respuesta {
@@ -25,4 +28,11 @@ export class Respuesta {
     default: () => 'CURRENT_TIMESTAMP',
   })
   fechaCreacion: Date;
+
+@OneToMany(() => RespuestaAbierta, (ra) => ra.respuesta, { cascade: true })
+respuestasAbiertas: RespuestaAbierta[];
+
+@OneToMany(() => RespuestaOpcion, (ro) => ro.respuesta, { cascade: true })
+respuestasOpciones: RespuestaOpcion[];
+
 }

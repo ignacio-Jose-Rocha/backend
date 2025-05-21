@@ -46,6 +46,7 @@ export class EncuestasService {
       })) : []
     }))
   });
+  
 
   // Guardar todo en cascada
   const encuestaCreada = await this.encuestaRepository.save(encuesta);
@@ -55,6 +56,7 @@ export class EncuestasService {
     codigoRespuesta: encuestaCreada.codigoRespuesta,
     codigoResultados: encuestaCreada.codigoResultados
   };
+
 }
 
   async obtenerEncuesta(

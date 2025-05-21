@@ -26,7 +26,8 @@ export class RespuestaAbierta {
   @JoinColumn({ name: 'id_pregunta' })
   pregunta: Pregunta;
 
-  @ManyToOne(() => Respuesta)
-  @JoinColumn({ name: 'id_respuesta' })
-  respuesta: Respuesta;
+@ManyToOne(() => Respuesta, (respuesta) => respuesta.respuestasAbiertas)
+@JoinColumn({ name: 'id_respuesta' })
+respuesta: Respuesta;
+
 }

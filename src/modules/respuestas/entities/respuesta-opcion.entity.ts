@@ -19,9 +19,9 @@ export class RespuestaOpcion {
   @Column('int')
   id_opcion: number;
 
-  @ManyToOne(() => Respuesta)
-  @JoinColumn({ name: 'id_respuesta' })
-  respuesta: Respuesta;
+@ManyToOne(() => Respuesta, (respuesta) => respuesta.respuestasOpciones)
+@JoinColumn({ name: 'id_respuesta' })
+respuesta: Respuesta;
 
   @ManyToOne(() => Opcion)
   @JoinColumn({ name: 'id_opcion' })
